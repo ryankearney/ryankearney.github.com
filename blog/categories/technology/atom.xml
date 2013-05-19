@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Technology | Ryan Kearney]]></title>
-  <link href="http://ryankearney.github.io/blog/categories/technology/atom.xml" rel="self"/>
-  <link href="http://ryankearney.github.io/"/>
-  <updated>2013-05-19T03:37:34-05:00</updated>
-  <id>http://ryankearney.github.io/</id>
+  <link href="http://blog.ryankearney.com/blog/categories/technology/atom.xml" rel="self"/>
+  <link href="http://blog.ryankearney.com/"/>
+  <updated>2013-05-19T03:41:07-05:00</updated>
+  <id>http://blog.ryankearney.com/</id>
   <author>
     <name><![CDATA[Ryan Kearney]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Never Give Your Information To 10 Minute Old Startups]]></title>
-    <link href="http://ryankearney.github.io/2012/10/never-give-your-information-to-10-minute-old-startups/"/>
+    <link href="http://blog.ryankearney.com/2012/10/never-give-your-information-to-10-minute-old-startups/"/>
     <updated>2012-10-05T22:26:00-05:00</updated>
-    <id>http://ryankearney.github.io/2012/10/never-give-your-information-to-10-minute-old-startups</id>
+    <id>http://blog.ryankearney.com/2012/10/never-give-your-information-to-10-minute-old-startups</id>
     <content type="html"><![CDATA[<p>Handing over sensitive information to startups that are only a few minutes old can lead to bad, bad things.</p>
 
 <h2>The Startup</h2>
@@ -59,9 +59,9 @@
   
   <entry>
     <title type="html"><![CDATA[It costs $35 Million to send an HD video over SMS while roaming on AT&amp;T]]></title>
-    <link href="http://ryankearney.github.io/2012/08/it-costs-35-dollars-million-to-send-an-hd-video-over-sms-while-roaming-on-att/"/>
+    <link href="http://blog.ryankearney.com/2012/08/it-costs-35-dollars-million-to-send-an-hd-video-over-sms-while-roaming-on-att/"/>
     <updated>2012-08-15T22:13:00-05:00</updated>
-    <id>http://ryankearney.github.io/2012/08/it-costs-35-dollars-million-to-send-an-hd-video-over-sms-while-roaming-on-att</id>
+    <id>http://blog.ryankearney.com/2012/08/it-costs-35-dollars-million-to-send-an-hd-video-over-sms-while-roaming-on-att</id>
     <content type="html"><![CDATA[<p>AT&amp;T has the following chart on their webpage at <a href="http://www.wireless.att.com/learn/international/roaming/international-roaming.jsp">http://www.wireless.att.com/learn/international/roaming/international-roaming.jsp</a> which outlines roaming rates while outside the U.S. We’re going to concentrate on the Text Messages row, also known as SMS messages.</p>
 
 <table>
@@ -89,7 +89,7 @@
 <blockquote class="twitter-tweet"><p>So I just did the math. AT&amp;T charges $3,355,443.20 per GB to send via text messages when you’re roaming outside the US. That’s 3.3 Million.</p>&mdash; Ryan Kearney (@RyanAKearney) <a href="https://twitter.com/RyanAKearney/status/237585880276144128">August 20, 2012</a></blockquote>
 
 
-<script async src="http://ryankearney.github.io//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="http://blog.ryankearney.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>A few hours later, an AT&amp;T employee Tweets back (at least according to their Twitter bio they appear to be), but then almost immediately deletes their Tweet. No matter, their reply was already sent via text message, email, and cached on my desktop Twitter client Tweetbot. Below is a screenshot.</p>
@@ -137,9 +137,9 @@
   
   <entry>
     <title type="html"><![CDATA[How to: Quickly reach your 32GB bonus space for Dropbox for next to nothing]]></title>
-    <link href="http://ryankearney.github.io/2011/05/how-to-quickly-reach-your-32gb-bonus-space-for-dropbox-for-next-to-nothing/"/>
+    <link href="http://blog.ryankearney.com/2011/05/how-to-quickly-reach-your-32gb-bonus-space-for-dropbox-for-next-to-nothing/"/>
     <updated>2011-05-07T21:44:00-05:00</updated>
-    <id>http://ryankearney.github.io/2011/05/how-to-quickly-reach-your-32gb-bonus-space-for-dropbox-for-next-to-nothing</id>
+    <id>http://blog.ryankearney.com/2011/05/how-to-quickly-reach-your-32gb-bonus-space-for-dropbox-for-next-to-nothing</id>
     <content type="html"><![CDATA[<p><span class='caption-wrapper'><a href='/images/2011/05/DropboxQuota.png'><img class='caption' src='/images/2011/05/DropboxQuota.png' width='' height='' alt='$9.99 a month – 50 GB storage + 32 GB referral space + 250MB bonus = 82.25GB' title='$9.99 a month – 50 GB storage + 32 GB referral space + 250MB bonus = 82.25GB'></a><span class='caption-text'>$9.99 a month – 50 GB storage + 32 GB referral space + 250MB bonus = 82.25GB</span></span></p>
 
 <h2>Dropbox</h2>
@@ -193,9 +193,9 @@
   
   <entry>
     <title type="html"><![CDATA[iPad vs HP Mini Netbook]]></title>
-    <link href="http://ryankearney.github.io/2010/01/ipad-vs-hp-mini-netbook/"/>
+    <link href="http://blog.ryankearney.com/2010/01/ipad-vs-hp-mini-netbook/"/>
     <updated>2010-01-29T21:08:00-06:00</updated>
-    <id>http://ryankearney.github.io/2010/01/ipad-vs-hp-mini-netbook</id>
+    <id>http://blog.ryankearney.com/2010/01/ipad-vs-hp-mini-netbook</id>
     <content type="html"><![CDATA[<p>The iPad vs HP Mini Netbook is a much heated debate amongst mobile devices.</p>
 
 <p><blockquote><p>When you compare, there’s no comparison</p><footer><strong>AT&amp;T</strong></footer></blockquote></p>
@@ -392,9 +392,9 @@
   
   <entry>
     <title type="html"><![CDATA[Comparing CDN Performance (Part 2)]]></title>
-    <link href="http://ryankearney.github.io/2009/12/comparing-cdn-performance-part-2/"/>
+    <link href="http://blog.ryankearney.com/2009/12/comparing-cdn-performance-part-2/"/>
     <updated>2009-12-15T12:18:00-06:00</updated>
-    <id>http://ryankearney.github.io/2009/12/comparing-cdn-performance-part-2</id>
+    <id>http://blog.ryankearney.com/2009/12/comparing-cdn-performance-part-2</id>
     <content type="html"><![CDATA[<p>Last week I wrote an article comparing Amazon S3 and Cloud Front to Rackspace Cloud Files. Since then I have gotten additional requests to compare more content delivery networks. The following is a comparison of Amazon Cloud Front, Rackspace Cloud Files, SimpleCDN, and GoGrid CDN. I tried to cover as many bases as I could. Please let me know if I missed anything.</p>
 
 <h2>Response Time</h2>
