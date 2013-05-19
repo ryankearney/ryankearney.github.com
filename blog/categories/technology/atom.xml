@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Technology | Ryan Kearney]]></title>
   <link href="http://blog.ryankearney.com/blog/categories/technology/atom.xml" rel="self"/>
   <link href="http://blog.ryankearney.com/"/>
-  <updated>2013-05-19T13:22:12-05:00</updated>
+  <updated>2013-05-19T13:29:59-05:00</updated>
   <id>http://blog.ryankearney.com/</id>
   <author>
     <name><![CDATA[Ryan Kearney]]></name>
@@ -403,7 +403,7 @@
 
 <p><span class='caption-wrapper'><a href='/images/2009/12/CloudFrontResponseTime.png'><img class='caption' src='/images/2009/12/CloudFrontResponseTime.png' width='200' height='215' alt='Amazon CloudFront' title='Amazon CloudFront'></a><span class='caption-text'>Amazon CloudFront</span></span>
 <span class='caption-wrapper'><a href='/images/2009/12/GoGridResponseTime.png'><img class='caption' src='/images/2009/12/GoGridResponseTime.png' width='200' height='215' alt='GoGrid CDN' title='GoGrid CDN'></a><span class='caption-text'>GoGrid CDN</span></span>
-<span class='caption-wrapper'><a href='/images/2009/12/RackSpaceResponseTime.png'><img class='caption' src='/images/2009/12/RackSpaceResponseTime.png' width='200' height='214' alt='Rackspace CloudFiles' title='Rackspace CloudFiles'></a><span class='caption-text'>Rackspace CloudFiles</span></span>
+<span class='caption-wrapper'><a href='/images/2009/12/RackspaceResponseTime.png'><img class='caption' src='/images/2009/12/RackspaceResponseTime.png' width='200' height='214' alt='Rackspace CloudFiles' title='Rackspace CloudFiles'></a><span class='caption-text'>Rackspace CloudFiles</span></span>
 <span class='caption-wrapper'><a href='/images/2009/12/SimpleCDNResponseTime.png'><img class='caption' src='/images/2009/12/SimpleCDNResponseTime.png' width='200' height='213' alt='SimpleCDN' title='SimpleCDN'></a><span class='caption-text'>SimpleCDN</span></span></p>
 
 <!--more-->
