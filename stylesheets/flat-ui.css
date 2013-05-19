@@ -179,7 +179,7 @@
 body {
   color: #000000;
   background: #FFFFFF;
-  font: 18px/1.831 "Open Sans", sans-serif; }
+  font: 18px/1.831 Helvetica, sans-serif; }
 
 p {
   font-weight: 300; }
@@ -200,7 +200,6 @@ h1 {
   color: #2980B9;
   font-size: 32px;
   font-weight: 900; 
-  font-family: "Quicksand"; }
   .date-time{
     font-size: 16px;
     color: #7F8C8D;
@@ -217,14 +216,12 @@ h2 {
   color: #2980B9;
   font-size: 26px;
   font-weight: 500;
-  font-family: "Quicksand";
   margin-bottom: 2px; }
 
 h3 {
   color: #2980B9;
   font-size: 24px;
   font-weight: 500;
-  font-family: "Quicksand";
   margin-bottom: 4px;
   margin-top: 2px; }
   .tagline
@@ -236,7 +233,6 @@ h4 {
   color: #2980B9;
   font-size: 18px;
   font-weight: 500;
-  font-family: "Quicksand";
   line-height: 18px;
   margin-top: 4px; }
 
@@ -244,7 +240,6 @@ h5 {
   color: #2980B9;
   font-size: 16px;
   font-weight: 500;
-  font-family: "Quicksand";
   text-transform: none; }
   .date{
     margin-top: 26px;
@@ -254,7 +249,6 @@ h6 {
   color: #2980B9;
   font-size: 13px;
   font-weight: 500;
-  font-family: "Quicksand";
   text-transform: none; }
 
 .btn {
@@ -2581,7 +2575,6 @@ body.vjs-full-window {
 .jumbotron {
   font-size: 60px;
   line-height: 70px;
-  font-family: "Quicksand";
   position: relative;
   padding: 70px 0;
   color: #2980B9; }
