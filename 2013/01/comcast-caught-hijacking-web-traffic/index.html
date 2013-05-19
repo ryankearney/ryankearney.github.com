@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Comcast caught hijacking web traffic - Ryan Kearney</title>
+  <meta name="author" content="Ryan Kearney">
+
+  
+  <meta name="description" content="Comcast Caught Hijacking Web Traffic Jan 9th, 2013 On November 20th, 2012 Comcast hijacked my HTTP traffic and re-routed it through their own &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.ryankearney.com/2013/01/comcast-caught-hijacking-web-traffic">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet">
+  <link href="/stylesheets/flat-ui.css" rel="stylesheet">
+  <link href="/stylesheets/font-awesome.css" rel="stylesheet">
+  <link href="/atom.xml" rel="alternate" title="Ryan Kearney" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+      
+        <li><a href="/index.html">Home</a></li>
+      
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/RyanKearney" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    <li><a href="http://twitter.com/RyanAKearney" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+    <div class="span12">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Comcast Caught Hijacking Web Traffic
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2013-01-09T12:56:00-06:00" pubdate data-updated="true">Jan 9<span>th</span>, 2013</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>On November 20th, 2012 Comcast hijacked my HTTP traffic and re-routed it through their own servers, injecting a “notice” on the page before completing the request. What this means is instead of my web request being routed to the website I wanted to visit, Comcast took it upon themselves to hijack my web traffic, forcing it to go through their servers instead. This poses a massive security risk for users since there’s no telling what type of logging Comcast uses on their end. Why did they do all this? To force a “courtesy notice” on every webpage I visit until I logged into my Comcast account because I was within 90% of my new 300GB limit?</p>
+
+<p>In my testing I discovered that this only affects HTTP traffic and not HTTPS traffic. What this means is while your online banking may be safe, any other website you visit over HTTP may cause your privacy to be at risk. This is a prime example of why SSL encryption on websites is so important. However, it may only be a matter of time before Comcast starts executing man in the middle attacks on SSL traffic.</p>
+
+<!--more-->
+
+
+<h2>Web Log</h2>
+
+<p>Here’s an excerpt from the servers web log</p>
+
+<pre><code>2601:5:300:83:6997:f2b7:4d2d:c7fd - - [20/Nov/2012:21:38:44 -0800] "GET / HTTP/1.1" 200
+68.87.68.230 - - [20/Nov/2012:21:38:31 -0800] "GET / HTTP/1.1" 200
+68.87.68.230 - - [20/Nov/2012:21:35:58 -0800] "GET / HTTP/1.1" 200
+2601:5:300:83:6997:f2b7:4d2d:c7fd - - [20/Nov/2012:21:35:56 -0800] "GET / HTTP/1.1" 200
+</code></pre>
+
+<p>All four requests were made by my computer. The first was made straight to the server using my IPv6 address of <strong>2601:5:300:83:6997:f2b7:4d2d:c7fd</strong>. The second two requests were hijacked by Comcast so the request ended up coming from <strong>68.87.68.230</strong> (one of Comcast’s used to hijack customer’s web traffic).</p>
+
+<p>After a request is hijacked, HTML code is injected into the web page to display this message</p>
+
+<p><img src="/images/2013/01/ComcastCourtseyNotice.png"></p>
+
+<p>Below is the code that Comcast is injecting into the page.</p>
+
+<div><script src='https://gist.github.com/4146814.js?file=ComcastInject.html'></script>
+<noscript><pre><code>&lt;script language=&quot;JavaScript&quot; type=&quot;text/javascript&quot;&gt;
+// Comcast Cable Communications, LLC Proprietary. Copyright 2012.
+// Intended use is to display browser notifications for critical and time sensitive alerts.
+var SYS_URL='/e8f6b078-0f35-11de-85c5-efc5ef23aa1f/aupm/notify.do';
+// var image_url='http://servicealerts.comcast.net:8080/images/mt';
+var image_url='http://xfinity.comcast.net/constantguard/BotAssistance/notice/images';
+var headertext1='&lt;strong&gt;Comcast Courtesy Notice&lt;/strong&gt;';
+var textline1='You have reached 90% of your &lt;b&gt;monthly data usage allowance&lt;/b&gt;.';
+var textline2='Please sign in for more information and to remove this alert.';
+var acknowledgebutton='&lt;a href=\&quot;#\&quot; onClick=&quot;document.location.href=\''+SYS_URL+'?dispatch=redirect&amp;redirectName=login&amp;paramName=bmUid\'&quot; title=&quot;Sign in to acknowledge&quot; style=&quot;color: #FFFFFF;&quot;&gt;&lt;img alt=&quot;Sign in to acknowledge&quot; src=&quot;'+image_url+'/mt_signin.png&quot;/&gt;&lt;/a&gt;';
+var verifybulletin='&lt;a href=&quot;http://customer.comcast.com/help-and-support/internet/data-usage-plans-nash/&quot; target=&quot;_new&quot;&gt;How do I know this message is from Comcast?&lt;/a&gt;';
+
+if(self.location==top.location) {
+document.write('&lt;style type=&quot;text/css&quot;&gt;');
+document.write('#comcast_content {width: 600px; height:240px; box-shadow: 10px 10px 5px #888; background: #fff; border: 1px solid #454545; position:absolute; top:50px; left:100px; zoom:1; z-index: 9999999; opacity:0.90; filter:alpha(opacity=90);}');
+document.write('#comcast_content .header {height: 35px; background:url('+image_url+'/headerbg.gif) repeat-x;}');
+document.write('#comcast_content .a {color: #00a3e0;}');
+document.write('#comcast_content .logo {float:left;}');
+document.write('#comcast_content .content-wrapper {padding-left: 18px; padding-right: 15px; padding-bottom: 12px;}');
+document.write('#comcast_content .headerimage { margin-top: 15px;}');
+document.write('#comcast_content .header1 {margin: 18px 0 0 0; color: #C00000; padding: 3px; font: 23px/24px bold Arial, Helvetica, sans-serif;}');
+document.write('#comcast_content .textcontent {margin: 12px 0 0 0; text-align: center; color: #303030; word-spacing: 0px; font: 14px/15px Arial, Helvetica, sans-serif; line-height: 1.20;}');
+document.write('#comcast_content .acknowledge {padding-top:6px; text-align: center;}');
+document.write('#comcast_content .how-do-i {float:left; position:absolute; bottom:20px; left:18px; margin: 12px 0 0 0; font: 13px/14px bold Arial, Helvetica, sans-serif; text-align: bottom;}');
+document.write('#comcast_content .comcast-wrapper {float:right; position:absolute; bottom:15px; right:18px; padding-top:0px; text-align: right;}');
+document.write('&lt;/style&gt;');
+document.write('&lt;div class=&quot;main-wrapper&quot; id=&quot;comcast_content&quot;&gt;');
+document.write('&lt;div class=&quot;header&quot; onmousedown=&quot;javascript:dragStart(event,\'comcast_content\')&quot;&gt;');
+document.write('&lt;img src=&quot;'+image_url+'/xfinity-logo.gif&quot; alt=&quot;Xfinity&quot; class=&quot;logo&quot;/&gt;');
+document.write('&lt;/div&gt;');
+document.write('&lt;div class=&quot;content-wrapper&quot;&gt;');
+document.write('&lt;p class=&quot;header1&quot;&gt;');
+document.write(headertext1);
+document.write('&lt;/p&gt;');
+document.write('&lt;p class=&quot;textcontent&quot;&gt;');
+document.write(textline1);
+document.write('&lt;/p&gt;');
+document.write('&lt;p class=&quot;textcontent&quot;&gt;');
+document.write(textline2);
+document.write('&lt;/p&gt;');
+document.write('&lt;p class=&quot;how-do-i&quot;&gt;');
+document.write(verifybulletin);
+document.write('&lt;/p&gt;');
+document.write('&lt;div class=&quot;acknowledge&quot;&gt;');
+document.write(acknowledgebutton);
+document.write('&lt;/div&gt;');
+document.write('&lt;div class=&quot;comcast-wrapper&quot;&gt;');
+document.write('&lt;img src=&quot;'+image_url+'/message-by-comcast.gif&quot; alt=&quot;Message by Comcast&quot;/&gt;');
+document.write('&lt;/div&gt;');
+document.write('&lt;/div&gt;');
+document.write('&lt;/div&gt;');
+}
+
+// Function to Determine browser and version. Copyright 2001 by Mike Hall.
+// See http://www.brainjar.com for terms of use.
+
+function Browser() {  
+var ua, s, i;  
+this.isIE  = false; 
+this.isNS  = false; 
+this.version = null;  
+ua = navigator.userAgent;  
+s = &quot;MSIE&quot;; 
+if ((i = ua.indexOf(s)) &gt;= 1) { 
+    this.isIE = true; this.version = parseFloat(ua.substr(i + s.length)); return; 
+}  
+s = &quot;Netscape6/&quot;; 
+if ((i = ua.indexOf(s)) &gt;= 0) { 
+    this.isNS = true; this.version = parseFloat(ua.substr(i + s.length)); return; 
+}  
+s = &quot;Gecko&quot;; 
+if ((i = ua.indexOf(s)) &gt;= 0) { 
+    this.isNS = true; this.version = 6.1; return; 
+} 
+}  
+var browser1 = new Browser();    
+var dragObj = new Object(); 
+dragObj.zIndex = 99999;  
+function dragStart(event, id) {  
+var el; 
+var x, y;   
+if (id) dragObj.elNode = document.getElementById(id); 
+else { 
+    if (browser1.isIE) dragObj.elNode = window.event.srcElement; 
+    if (browser1.isNS) dragObj.elNode = event.target;   
+    if (dragObj.elNode.nodeType == 3) dragObj.elNode = dragObj.elNode.parentNode; 
+}   
+if (browser1.isIE) { 
+    x = window.event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft; 
+    y = window.event.clientY + document.documentElement.scrollTop + document.body.scrollTop; 
+} 
+if (browser1.isNS) { 
+    x = event.clientX + window.scrollX; 
+    y = event.clientY + window.scrollY; 
+}   
+dragObj.cursorStartX = x; 
+dragObj.cursorStartY = y; 
+dragObj.elStartLeft = parseInt(dragObj.elNode.style.left, 10); 
+dragObj.elStartTop  = parseInt(dragObj.elNode.style.top, 10);  
+if (isNaN(dragObj.elStartLeft)) dragObj.elStartLeft = 100; 
+if (isNaN(dragObj.elStartTop)) dragObj.elStartTop = 50;    
+if (browser1.isIE) { 
+    document.attachEvent(&quot;onmousemove&quot;, dragGo); 
+    document.attachEvent(&quot;onmouseup&quot;,  dragStop); 
+    window.event.cancelBubble = true; 
+    window.event.returnValue = false; } 
+if (browser1.isNS) { 
+    document.addEventListener(&quot;mousemove&quot;, dragGo,  true); 
+    document.addEventListener(&quot;mouseup&quot;,  dragStop, true); 
+    event.preventDefault(); 
+} 
+}  
+
+// End Function
+
+function dragGo(event) {  
+var x, y;   
+if (browser1.isIE) { 
+    x = window.event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft; 
+    y = window.event.clientY + document.documentElement.scrollTop + document.body.scrollTop; 
+} 
+if (browser1.isNS) { 
+    x = event.clientX + window.scrollX; y = event.clientY + window.scrollY; 
+}   
+dragObj.elNode.style.left = (dragObj.elStartLeft + x - dragObj.cursorStartX) + &quot;px&quot;; 
+dragObj.elNode.style.top = (dragObj.elStartTop + y - dragObj.cursorStartY) + &quot;px&quot;;  
+if (browser1.isIE) { window.event.cancelBubble = true; window.event.returnValue = false; } 
+if (browser1.isNS) event.preventDefault(); }  
+
+function dragStop(event) {   
+if (browser1.isIE) {
+    document.detachEvent(&quot;onmousemove&quot;, dragGo); 
+    document.detachEvent(&quot;onmouseup&quot;,  dragStop); 
+} 
+if (browser1.isNS) { 
+    document.removeEventListener(&quot;mousemove&quot;, dragGo,  true); 
+    document.removeEventListener(&quot;mouseup&quot;,  dragStop, true); 
+} 
+}  
+
+var xmlhttp=false; /*@cc_on @*/ /*@if (@_jscript_version &gt;= 5) try { xmlhttp = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;); } catch (e) { try {  xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); } catch (E) {  xmlhttp = false; } } @end @*/ if (!xmlhttp &amp;&amp; typeof XMLHttpRequest!='undefined') { try { xmlhttp = new XMLHttpRequest(); } catch (e) {        xmlhttp=false;    } } if (!xmlhttp &amp;&amp; window.createRequest) {    try { xmlhttp = window.createRequest(); } catch (e) { xmlhttp=false; } }   
+
+function acknowledge() { sendAck(); document.getElementById('comcast_content').style.display=&quot;none&quot;; } 
+function sendAck(){ xmlhttp.open(&quot;GET&quot;, SYS_URL+'?dispatch=ackBulletin',true); xmlhttp.send(null) }
+
+var comcastCheck=1;
+var comcastTimer;
+function checkBulletin(){
+if(comcastCheck==0) { return; }
+xmlhttp.open(&quot;GET&quot;, SYS_URL+'?dispatch=checkBulletin',true);
+xmlhttp.onreadystatechange = function() {
+if (xmlhttp.readyState == 4) {
+    if(xmlhttp.responseText.indexOf('43a1028c-7d11-11de-b687-1f15c5ad6a13')==-1){
+        document.getElementById('comcast_content').style.display=&quot;none&quot;;
+        comcastCheck=1;
+    }
+    comcastTimer=setTimeout(&quot;checkBulletin()&quot;,5000);
+    }; 
+};
+xmlhttp.send(null);
+}
+checkBulletin();
+&lt;/script&gt;</code></pre></noscript></div>
+
+
+
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    <div class="row-fluid">
+      <div class="span6">
+        <p class="meta">
+        
+        
+          
+
+
+
+  <a href="/blog/categories/Security/"><span class="badge">Security</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.ryankearney.com/2013/01/comcast-caught-hijacking-web-traffic/" data-via="RyanAKearney" data-counturl="http://blog.ryankearney.com/2013/01/comcast-caught-hijacking-web-traffic/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="false" data-width="450" data-show-faces="false" data-layout="button_count"></div>
+  
+</div>
+
+      </div>
+      
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/2012/10/never-give-your-information-to-10-minute-old-startups/" title="Previous Post: Never Give Your Information To 10 Minute Old Startups">&laquo; Never Give Your Information To 10 Minute Old Startups</a>
+          
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+  <section>
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2013 - Ryan Kearney -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
+</p>
+
+
+        </footer>
+      </div>
+    </div>
+  </div>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ryankearney';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.ryankearney.com/2013/01/comcast-caught-hijacking-web-traffic/';
+        var disqus_url = 'http://blog.ryankearney.com/2013/01/comcast-caught-hijacking-web-traffic/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=233199623487249";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

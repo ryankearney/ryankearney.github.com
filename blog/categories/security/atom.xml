@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Security | Ryan Kearney]]></title>
+  <link href="http://blog.ryankearney.com/blog/categories/security/atom.xml" rel="self"/>
+  <link href="http://blog.ryankearney.com/"/>
+  <updated>2013-05-19T03:15:23-05:00</updated>
+  <id>http://blog.ryankearney.com/</id>
+  <author>
+    <name><![CDATA[Ryan Kearney]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Comcast caught hijacking web traffic]]></title>
+    <link href="http://blog.ryankearney.com/2013/01/comcast-caught-hijacking-web-traffic/"/>
+    <updated>2013-01-09T12:56:00-06:00</updated>
+    <id>http://blog.ryankearney.com/2013/01/comcast-caught-hijacking-web-traffic</id>
+    <content type="html"><![CDATA[<p>On November 20th, 2012 Comcast hijacked my HTTP traffic and re-routed it through their own servers, injecting a “notice” on the page before completing the request. What this means is instead of my web request being routed to the website I wanted to visit, Comcast took it upon themselves to hijack my web traffic, forcing it to go through their servers instead. This poses a massive security risk for users since there’s no telling what type of logging Comcast uses on their end. Why did they do all this? To force a “courtesy notice” on every webpage I visit until I logged into my Comcast account because I was within 90% of my new 300GB limit?</p>
+
+<p>In my testing I discovered that this only affects HTTP traffic and not HTTPS traffic. What this means is while your online banking may be safe, any other website you visit over HTTP may cause your privacy to be at risk. This is a prime example of why SSL encryption on websites is so important. However, it may only be a matter of time before Comcast starts executing man in the middle attacks on SSL traffic.</p>
+
+<!--more-->
+
+
+<h2>Web Log</h2>
+
+<p>Here’s an excerpt from the servers web log</p>
+
+<pre><code>2601:5:300:83:6997:f2b7:4d2d:c7fd - - [20/Nov/2012:21:38:44 -0800] "GET / HTTP/1.1" 200
+68.87.68.230 - - [20/Nov/2012:21:38:31 -0800] "GET / HTTP/1.1" 200
+68.87.68.230 - - [20/Nov/2012:21:35:58 -0800] "GET / HTTP/1.1" 200
+2601:5:300:83:6997:f2b7:4d2d:c7fd - - [20/Nov/2012:21:35:56 -0800] "GET / HTTP/1.1" 200
+</code></pre>
+
+<p>All four requests were made by my computer. The first was made straight to the server using my IPv6 address of <strong>2601:5:300:83:6997:f2b7:4d2d:c7fd</strong>. The second two requests were hijacked by Comcast so the request ended up coming from <strong>68.87.68.230</strong> (one of Comcast’s used to hijack customer’s web traffic).</p>
+
+<p>After a request is hijacked, HTML code is injected into the web page to display this message</p>
+
+<p><img src="/images/2013/01/ComcastCourtseyNotice.png"></p>
+
+<p>Below is the code that Comcast is injecting into the page.</p>
+
+<p><div><script src='https://gist.github.com/4146814.js?file=ComcastInject.html'></script>
+<noscript><pre><code>&lt;script language=&quot;JavaScript&quot; type=&quot;text/javascript&quot;&gt;
+// Comcast Cable Communications, LLC Proprietary. Copyright 2012.
+// Intended use is to display browser notifications for critical and time sensitive alerts.
+var SYS_URL='/e8f6b078-0f35-11de-85c5-efc5ef23aa1f/aupm/notify.do';
+// var image_url='http://servicealerts.comcast.net:8080/images/mt';
+var image_url='http://xfinity.comcast.net/constantguard/BotAssistance/notice/images';
+var headertext1='&lt;strong&gt;Comcast Courtesy Notice&lt;/strong&gt;';
+var textline1='You have reached 90% of your &lt;b&gt;monthly data usage allowance&lt;/b&gt;.';
+var textline2='Please sign in for more information and to remove this alert.';
+var acknowledgebutton='&lt;a href=\&quot;#\&quot; onClick=&quot;document.location.href=\''+SYS_URL+'?dispatch=redirect&amp;redirectName=login&amp;paramName=bmUid\'&quot; title=&quot;Sign in to acknowledge&quot; style=&quot;color: #FFFFFF;&quot;&gt;&lt;img alt=&quot;Sign in to acknowledge&quot; src=&quot;'+image_url+'/mt_signin.png&quot;/&gt;&lt;/a&gt;';
+var verifybulletin='&lt;a href=&quot;http://customer.comcast.com/help-and-support/internet/data-usage-plans-nash/&quot; target=&quot;_new&quot;&gt;How do I know this message is from Comcast?&lt;/a&gt;';
+
+if(self.location==top.location) {
+document.write('&lt;style type=&quot;text/css&quot;&gt;');
+document.write('#comcast_content {width: 600px; height:240px; box-shadow: 10px 10px 5px #888; background: #fff; border: 1px solid #454545; position:absolute; top:50px; left:100px; zoom:1; z-index: 9999999; opacity:0.90; filter:alpha(opacity=90);}');
+document.write('#comcast_content .header {height: 35px; background:url('+image_url+'/headerbg.gif) repeat-x;}');
+document.write('#comcast_content .a {color: #00a3e0;}');
+document.write('#comcast_content .logo {float:left;}');
+document.write('#comcast_content .content-wrapper {padding-left: 18px; padding-right: 15px; padding-bottom: 12px;}');
+document.write('#comcast_content .headerimage { margin-top: 15px;}');
+document.write('#comcast_content .header1 {margin: 18px 0 0 0; color: #C00000; padding: 3px; font: 23px/24px bold Arial, Helvetica, sans-serif;}');
+document.write('#comcast_content .textcontent {margin: 12px 0 0 0; text-align: center; color: #303030; word-spacing: 0px; font: 14px/15px Arial, Helvetica, sans-serif; line-height: 1.20;}');
+document.write('#comcast_content .acknowledge {padding-top:6px; text-align: center;}');
+document.write('#comcast_content .how-do-i {float:left; position:absolute; bottom:20px; left:18px; margin: 12px 0 0 0; font: 13px/14px bold Arial, Helvetica, sans-serif; text-align: bottom;}');
+document.write('#comcast_content .comcast-wrapper {float:right; position:absolute; bottom:15px; right:18px; padding-top:0px; text-align: right;}');
+document.write('&lt;/style&gt;');
+document.write('&lt;div class=&quot;main-wrapper&quot; id=&quot;comcast_content&quot;&gt;');
+document.write('&lt;div class=&quot;header&quot; onmousedown=&quot;javascript:dragStart(event,\'comcast_content\')&quot;&gt;');
+document.write('&lt;img src=&quot;'+image_url+'/xfinity-logo.gif&quot; alt=&quot;Xfinity&quot; class=&quot;logo&quot;/&gt;');
+document.write('&lt;/div&gt;');
+document.write('&lt;div class=&quot;content-wrapper&quot;&gt;');
+document.write('&lt;p class=&quot;header1&quot;&gt;');
+document.write(headertext1);
+document.write('&lt;/p&gt;');
+document.write('&lt;p class=&quot;textcontent&quot;&gt;');
+document.write(textline1);
+document.write('&lt;/p&gt;');
+document.write('&lt;p class=&quot;textcontent&quot;&gt;');
+document.write(textline2);
+document.write('&lt;/p&gt;');
+document.write('&lt;p class=&quot;how-do-i&quot;&gt;');
+document.write(verifybulletin);
+document.write('&lt;/p&gt;');
+document.write('&lt;div class=&quot;acknowledge&quot;&gt;');
+document.write(acknowledgebutton);
+document.write('&lt;/div&gt;');
+document.write('&lt;div class=&quot;comcast-wrapper&quot;&gt;');
+document.write('&lt;img src=&quot;'+image_url+'/message-by-comcast.gif&quot; alt=&quot;Message by Comcast&quot;/&gt;');
+document.write('&lt;/div&gt;');
+document.write('&lt;/div&gt;');
+document.write('&lt;/div&gt;');
+}
+
+// Function to Determine browser and version. Copyright 2001 by Mike Hall.
+// See http://www.brainjar.com for terms of use.
+
+function Browser() {  
+var ua, s, i;  
+this.isIE  = false; 
+this.isNS  = false; 
+this.version = null;  
+ua = navigator.userAgent;  
+s = &quot;MSIE&quot;; 
+if ((i = ua.indexOf(s)) &gt;= 1) { 
+	this.isIE = true; this.version = parseFloat(ua.substr(i + s.length)); return; 
+}  
+s = &quot;Netscape6/&quot;; 
+if ((i = ua.indexOf(s)) &gt;= 0) { 
+	this.isNS = true; this.version = parseFloat(ua.substr(i + s.length)); return; 
+}  
+s = &quot;Gecko&quot;; 
+if ((i = ua.indexOf(s)) &gt;= 0) { 
+	this.isNS = true; this.version = 6.1; return; 
+} 
+}  
+var browser1 = new Browser();    
+var dragObj = new Object(); 
+dragObj.zIndex = 99999;  
+function dragStart(event, id) {  
+var el; 
+var x, y;   
+if (id) dragObj.elNode = document.getElementById(id); 
+else { 
+	if (browser1.isIE) dragObj.elNode = window.event.srcElement; 
+	if (browser1.isNS) dragObj.elNode = event.target;   
+	if (dragObj.elNode.nodeType == 3) dragObj.elNode = dragObj.elNode.parentNode; 
+}   
+if (browser1.isIE) { 
+	x = window.event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft; 
+	y = window.event.clientY + document.documentElement.scrollTop + document.body.scrollTop; 
+} 
+if (browser1.isNS) { 
+	x = event.clientX + window.scrollX; 
+	y = event.clientY + window.scrollY; 
+}   
+dragObj.cursorStartX = x; 
+dragObj.cursorStartY = y; 
+dragObj.elStartLeft = parseInt(dragObj.elNode.style.left, 10); 
+dragObj.elStartTop  = parseInt(dragObj.elNode.style.top, 10);  
+if (isNaN(dragObj.elStartLeft)) dragObj.elStartLeft = 100; 
+if (isNaN(dragObj.elStartTop)) dragObj.elStartTop = 50;    
+if (browser1.isIE) { 
+	document.attachEvent(&quot;onmousemove&quot;, dragGo); 
+	document.attachEvent(&quot;onmouseup&quot;,  dragStop); 
+	window.event.cancelBubble = true; 
+	window.event.returnValue = false; } 
+if (browser1.isNS) { 
+	document.addEventListener(&quot;mousemove&quot;, dragGo,  true); 
+	document.addEventListener(&quot;mouseup&quot;,  dragStop, true); 
+	event.preventDefault(); 
+} 
+}  
+
+// End Function
+
+function dragGo(event) {  
+var x, y;   
+if (browser1.isIE) { 
+	x = window.event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft; 
+	y = window.event.clientY + document.documentElement.scrollTop + document.body.scrollTop; 
+} 
+if (browser1.isNS) { 
+	x = event.clientX + window.scrollX; y = event.clientY + window.scrollY; 
+}   
+dragObj.elNode.style.left = (dragObj.elStartLeft + x - dragObj.cursorStartX) + &quot;px&quot;; 
+dragObj.elNode.style.top = (dragObj.elStartTop + y - dragObj.cursorStartY) + &quot;px&quot;;  
+if (browser1.isIE) { window.event.cancelBubble = true; window.event.returnValue = false; } 
+if (browser1.isNS) event.preventDefault(); }  
+
+function dragStop(event) {   
+if (browser1.isIE) {
+	document.detachEvent(&quot;onmousemove&quot;, dragGo); 
+	document.detachEvent(&quot;onmouseup&quot;,  dragStop); 
+} 
+if (browser1.isNS) { 
+	document.removeEventListener(&quot;mousemove&quot;, dragGo,  true); 
+	document.removeEventListener(&quot;mouseup&quot;,  dragStop, true); 
+} 
+}  
+
+var xmlhttp=false; /*@cc_on @*/ /*@if (@_jscript_version &gt;= 5) try { xmlhttp = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;); } catch (e) { try {  xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); } catch (E) {  xmlhttp = false; } } @end @*/ if (!xmlhttp &amp;&amp; typeof XMLHttpRequest!='undefined') { try { xmlhttp = new XMLHttpRequest(); } catch (e) {        xmlhttp=false;    } } if (!xmlhttp &amp;&amp; window.createRequest) {    try { xmlhttp = window.createRequest(); } catch (e) { xmlhttp=false; } }   
+
+function acknowledge() { sendAck(); document.getElementById('comcast_content').style.display=&quot;none&quot;; } 
+function sendAck(){ xmlhttp.open(&quot;GET&quot;, SYS_URL+'?dispatch=ackBulletin',true); xmlhttp.send(null) }
+
+var comcastCheck=1;
+var comcastTimer;
+function checkBulletin(){
+if(comcastCheck==0) { return; }
+xmlhttp.open(&quot;GET&quot;, SYS_URL+'?dispatch=checkBulletin',true);
+xmlhttp.onreadystatechange = function() {
+if (xmlhttp.readyState == 4) {
+	if(xmlhttp.responseText.indexOf('43a1028c-7d11-11de-b687-1f15c5ad6a13')==-1){
+		document.getElementById('comcast_content').style.display=&quot;none&quot;;
+		comcastCheck=1;
+	}
+	comcastTimer=setTimeout(&quot;checkBulletin()&quot;,5000);
+	}; 
+};
+xmlhttp.send(null);
+}
+checkBulletin();
+&lt;/script&gt;</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Never Give Your Information To 10 Minute Old Startups]]></title>
+    <link href="http://blog.ryankearney.com/2012/10/never-give-your-information-to-10-minute-old-startups/"/>
+    <updated>2012-10-05T22:26:00-05:00</updated>
+    <id>http://blog.ryankearney.com/2012/10/never-give-your-information-to-10-minute-old-startups</id>
+    <content type="html"><![CDATA[<p>Handing over sensitive information to startups that are only a few minutes old can lead to bad, bad things.</p>
+
+<h2>The Startup</h2>
+
+<p>The startup under fire today is a web service by the name of Ice Box Pro posted on <a href="http://news.ycombinator.com/item?id=4619132">Hacker News</a> today proved that point. The service was designed as a way to back up filed to Amazon Glacier that you put in a special Dropbox folder. I was curious to see how well it performed, so I decided to sign up and give it a test run. What follows is a perfect example on how not to handle security.</p>
+
+<p>Clicking on the Account tab brings you to your account page, visible below.</p>
+
+<!--more-->
+
+
+<p><span class='caption-wrapper'><a href='/images/2012/10/IceBoxProAccount.png'><img class='caption' src='/images/2012/10/IceBoxProAccount.png' width='' height='' alt='The Your Account page on an Ice Box Pro account' title='The Your Account page on an Ice Box Pro account'></a><span class='caption-text'>The Your Account page on an Ice Box Pro account</span></span></p>
+
+<p>Visible are your name, email, AWS ID and Key, and the AWS Glacier vault created by Ice Box Pro. Upon setting your AWS ID and Key, only the last few characters are actually visible. What’s even more interesting, however, is the <strong>/users/87</strong> part of the URL. As it turns out, your User ID is baked into the URL. In this example, I was the 87th user to sign up for Ice Box Pro. My original account was somewhere between 5 and 15, although I entered in random text for the email address so I couldn’t log back in.</p>
+
+<p>So what’s the problem? I’ll give you one guess as to what happens when you change that 87 to another number.</p>
+
+<h2>Viewing other users information</h2>
+
+<p>That’s right, you could change that 87 to any number you could think of and it would spit back the information for that user. You would see exactly the same information you could see for yourself. This quickly reminded me of the <a href="https://stripe-ctf.com/">Stripe CTF</a> a few months ago. Since you can only see the Name, Email, and the last few characters of the users ID and Key, the information isn’t too dangerous with the exception of it being a spammers gold mine. But wait, it gets worse…</p>
+
+<h2>Compromising accounts</h2>
+
+<p>See that Edit link at the bottom of the account page? Click it and you’ll see the account edit view!</p>
+
+<p><span class='caption-wrapper'><a href='/images/2012/10/IceBoxProEditAccount.png'><img class='caption' src='/images/2012/10/IceBoxProEditAccount.png' width='' height='' alt='In the Edit Your Account view, you can change your name, email, password, and AWS info' title='In the Edit Your Account view, you can change your name, email, password, and AWS info'></a><span class='caption-text'>In the Edit Your Account view, you can change your name, email, password, and AWS info</span></span></p>
+
+<p>The important part here is to note that if I had filled out an AWS access key ID and AWS secret access key previously, the entire key would be visible on this screen. So while only the last few characters are visible from the account view, the entire key is visible from the edit view. It’s worth noting that the edit option is available for <strong>any user account</strong> and can be accessed by <strong>anyone</strong>.</p>
+
+<p>This means that by going to /users/1/edit and /users/2/edit, you could edit the details of the two founders of Ice Box Pro. From here you can reset their password, login as them, and get access to any file they backed up. Even worse it gives you access to their AWS keys.</p>
+
+<p>If you setup your access correctly, then only your AWS glacier service can be accessed. Some users, however, I found used their master AWS keys which give access to every area of Amazon Web Services (EC2, S3, etc).</p>
+
+<h2>Conclusion</h2>
+
+<p>Never give any kind of information to a startup that came into existence just 10 minutes ago. At least give it a few days for them to work out the security vulnerabilities such as this. The one I saw today was one of the worst imaginable. Full control over any users account, password, and AWS keys. Users that used their master AWS keys opened themselves up to a major headache if the keys were accessed by the wrong people and not revoked in time.</p>
+]]></content>
+  </entry>
+  
+</feed>

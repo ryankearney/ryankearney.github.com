@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Never Give Your Information To 10 Minute Old Startups - Ryan Kearney</title>
+  <meta name="author" content="Ryan Kearney">
+
+  
+  <meta name="description" content="Never Give Your Information to 10 Minute Old Startups Oct 5th, 2012 Handing over sensitive information to startups that are only a few minutes old &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.ryankearney.com/2012/10/never-give-your-information-to-10-minute-old-startups">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet">
+  <link href="/stylesheets/flat-ui.css" rel="stylesheet">
+  <link href="/stylesheets/font-awesome.css" rel="stylesheet">
+  <link href="/atom.xml" rel="alternate" title="Ryan Kearney" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+      
+        <li><a href="/index.html">Home</a></li>
+      
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/RyanKearney" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    <li><a href="http://twitter.com/RyanAKearney" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+    <div class="span12">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Never Give Your Information to 10 Minute Old Startups
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2012-10-05T22:26:00-05:00" pubdate data-updated="true">Oct 5<span>th</span>, 2012</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>Handing over sensitive information to startups that are only a few minutes old can lead to bad, bad things.</p>
+
+<h2>The Startup</h2>
+
+<p>The startup under fire today is a web service by the name of Ice Box Pro posted on <a href="http://news.ycombinator.com/item?id=4619132">Hacker News</a> today proved that point. The service was designed as a way to back up filed to Amazon Glacier that you put in a special Dropbox folder. I was curious to see how well it performed, so I decided to sign up and give it a test run. What follows is a perfect example on how not to handle security.</p>
+
+<p>Clicking on the Account tab brings you to your account page, visible below.</p>
+
+<!--more-->
+
+
+<p><span class='caption-wrapper'><a href='/images/2012/10/IceBoxProAccount.png'><img class='caption' src='/images/2012/10/IceBoxProAccount.png' width='' height='' alt='The Your Account page on an Ice Box Pro account' title='The Your Account page on an Ice Box Pro account'></a><span class='caption-text'>The Your Account page on an Ice Box Pro account</span></span></p>
+
+<p>Visible are your name, email, AWS ID and Key, and the AWS Glacier vault created by Ice Box Pro. Upon setting your AWS ID and Key, only the last few characters are actually visible. What’s even more interesting, however, is the <strong>/users/87</strong> part of the URL. As it turns out, your User ID is baked into the URL. In this example, I was the 87th user to sign up for Ice Box Pro. My original account was somewhere between 5 and 15, although I entered in random text for the email address so I couldn’t log back in.</p>
+
+<p>So what’s the problem? I’ll give you one guess as to what happens when you change that 87 to another number.</p>
+
+<h2>Viewing other users information</h2>
+
+<p>That’s right, you could change that 87 to any number you could think of and it would spit back the information for that user. You would see exactly the same information you could see for yourself. This quickly reminded me of the <a href="https://stripe-ctf.com/">Stripe CTF</a> a few months ago. Since you can only see the Name, Email, and the last few characters of the users ID and Key, the information isn’t too dangerous with the exception of it being a spammers gold mine. But wait, it gets worse…</p>
+
+<h2>Compromising accounts</h2>
+
+<p>See that Edit link at the bottom of the account page? Click it and you’ll see the account edit view!</p>
+
+<p><span class='caption-wrapper'><a href='/images/2012/10/IceBoxProEditAccount.png'><img class='caption' src='/images/2012/10/IceBoxProEditAccount.png' width='' height='' alt='In the Edit Your Account view, you can change your name, email, password, and AWS info' title='In the Edit Your Account view, you can change your name, email, password, and AWS info'></a><span class='caption-text'>In the Edit Your Account view, you can change your name, email, password, and AWS info</span></span></p>
+
+<p>The important part here is to note that if I had filled out an AWS access key ID and AWS secret access key previously, the entire key would be visible on this screen. So while only the last few characters are visible from the account view, the entire key is visible from the edit view. It’s worth noting that the edit option is available for <strong>any user account</strong> and can be accessed by <strong>anyone</strong>.</p>
+
+<p>This means that by going to /users/1/edit and /users/2/edit, you could edit the details of the two founders of Ice Box Pro. From here you can reset their password, login as them, and get access to any file they backed up. Even worse it gives you access to their AWS keys.</p>
+
+<p>If you setup your access correctly, then only your AWS glacier service can be accessed. Some users, however, I found used their master AWS keys which give access to every area of Amazon Web Services (EC2, S3, etc).</p>
+
+<h2>Conclusion</h2>
+
+<p>Never give any kind of information to a startup that came into existence just 10 minutes ago. At least give it a few days for them to work out the security vulnerabilities such as this. The one I saw today was one of the worst imaginable. Full control over any users account, password, and AWS keys. Users that used their master AWS keys opened themselves up to a major headache if the keys were accessed by the wrong people and not revoked in time.</p>
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    <div class="row-fluid">
+      <div class="span6">
+        <p class="meta">
+        
+        
+          
+
+
+
+  <a href="/blog/categories/Security/"><span class="badge">Security</span></a>
+
+  <a href="/blog/categories/Technology/"><span class="badge">Technology</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.ryankearney.com/2012/10/never-give-your-information-to-10-minute-old-startups/" data-via="RyanAKearney" data-counturl="http://blog.ryankearney.com/2012/10/never-give-your-information-to-10-minute-old-startups/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="false" data-width="450" data-show-faces="false" data-layout="button_count"></div>
+  
+</div>
+
+      </div>
+      
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/2012/08/it-costs-35-dollars-million-to-send-an-hd-video-over-sms-while-roaming-on-att/" title="Previous Post: It costs $35 Million to send an HD video over SMS while roaming on AT&amp;T">&laquo; It costs $35 Million to send an HD video over SMS while roaming on AT&amp;T</a>
+          
+          
+            <a class="basic-alignment right" href="/2013/01/comcast-caught-hijacking-web-traffic/" title="Next Post: Comcast caught hijacking web traffic">Comcast caught hijacking web traffic &raquo;</a>
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+  <section>
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2013 - Ryan Kearney -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
+</p>
+
+
+        </footer>
+      </div>
+    </div>
+  </div>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ryankearney';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.ryankearney.com/2012/10/never-give-your-information-to-10-minute-old-startups/';
+        var disqus_url = 'http://blog.ryankearney.com/2012/10/never-give-your-information-to-10-minute-old-startups/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=233199623487249";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

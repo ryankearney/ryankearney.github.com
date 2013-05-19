@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Technology | Ryan Kearney]]></title>
+  <link href="http://blog.ryankearney.com/blog/categories/technology/atom.xml" rel="self"/>
+  <link href="http://blog.ryankearney.com/"/>
+  <updated>2013-05-19T03:15:23-05:00</updated>
+  <id>http://blog.ryankearney.com/</id>
+  <author>
+    <name><![CDATA[Ryan Kearney]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Never Give Your Information To 10 Minute Old Startups]]></title>
+    <link href="http://blog.ryankearney.com/2012/10/never-give-your-information-to-10-minute-old-startups/"/>
+    <updated>2012-10-05T22:26:00-05:00</updated>
+    <id>http://blog.ryankearney.com/2012/10/never-give-your-information-to-10-minute-old-startups</id>
+    <content type="html"><![CDATA[<p>Handing over sensitive information to startups that are only a few minutes old can lead to bad, bad things.</p>
+
+<h2>The Startup</h2>
+
+<p>The startup under fire today is a web service by the name of Ice Box Pro posted on <a href="http://news.ycombinator.com/item?id=4619132">Hacker News</a> today proved that point. The service was designed as a way to back up filed to Amazon Glacier that you put in a special Dropbox folder. I was curious to see how well it performed, so I decided to sign up and give it a test run. What follows is a perfect example on how not to handle security.</p>
+
+<p>Clicking on the Account tab brings you to your account page, visible below.</p>
+
+<!--more-->
+
+
+<p><span class='caption-wrapper'><a href='/images/2012/10/IceBoxProAccount.png'><img class='caption' src='/images/2012/10/IceBoxProAccount.png' width='' height='' alt='The Your Account page on an Ice Box Pro account' title='The Your Account page on an Ice Box Pro account'></a><span class='caption-text'>The Your Account page on an Ice Box Pro account</span></span></p>
+
+<p>Visible are your name, email, AWS ID and Key, and the AWS Glacier vault created by Ice Box Pro. Upon setting your AWS ID and Key, only the last few characters are actually visible. What’s even more interesting, however, is the <strong>/users/87</strong> part of the URL. As it turns out, your User ID is baked into the URL. In this example, I was the 87th user to sign up for Ice Box Pro. My original account was somewhere between 5 and 15, although I entered in random text for the email address so I couldn’t log back in.</p>
+
+<p>So what’s the problem? I’ll give you one guess as to what happens when you change that 87 to another number.</p>
+
+<h2>Viewing other users information</h2>
+
+<p>That’s right, you could change that 87 to any number you could think of and it would spit back the information for that user. You would see exactly the same information you could see for yourself. This quickly reminded me of the <a href="https://stripe-ctf.com/">Stripe CTF</a> a few months ago. Since you can only see the Name, Email, and the last few characters of the users ID and Key, the information isn’t too dangerous with the exception of it being a spammers gold mine. But wait, it gets worse…</p>
+
+<h2>Compromising accounts</h2>
+
+<p>See that Edit link at the bottom of the account page? Click it and you’ll see the account edit view!</p>
+
+<p><span class='caption-wrapper'><a href='/images/2012/10/IceBoxProEditAccount.png'><img class='caption' src='/images/2012/10/IceBoxProEditAccount.png' width='' height='' alt='In the Edit Your Account view, you can change your name, email, password, and AWS info' title='In the Edit Your Account view, you can change your name, email, password, and AWS info'></a><span class='caption-text'>In the Edit Your Account view, you can change your name, email, password, and AWS info</span></span></p>
+
+<p>The important part here is to note that if I had filled out an AWS access key ID and AWS secret access key previously, the entire key would be visible on this screen. So while only the last few characters are visible from the account view, the entire key is visible from the edit view. It’s worth noting that the edit option is available for <strong>any user account</strong> and can be accessed by <strong>anyone</strong>.</p>
+
+<p>This means that by going to /users/1/edit and /users/2/edit, you could edit the details of the two founders of Ice Box Pro. From here you can reset their password, login as them, and get access to any file they backed up. Even worse it gives you access to their AWS keys.</p>
+
+<p>If you setup your access correctly, then only your AWS glacier service can be accessed. Some users, however, I found used their master AWS keys which give access to every area of Amazon Web Services (EC2, S3, etc).</p>
+
+<h2>Conclusion</h2>
+
+<p>Never give any kind of information to a startup that came into existence just 10 minutes ago. At least give it a few days for them to work out the security vulnerabilities such as this. The one I saw today was one of the worst imaginable. Full control over any users account, password, and AWS keys. Users that used their master AWS keys opened themselves up to a major headache if the keys were accessed by the wrong people and not revoked in time.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[It costs $35 Million to send an HD video over SMS while roaming on AT&amp;T]]></title>
+    <link href="http://blog.ryankearney.com/2012/08/it-costs-35-dollars-million-to-send-an-hd-video-over-sms-while-roaming-on-att/"/>
+    <updated>2012-08-15T22:13:00-05:00</updated>
+    <id>http://blog.ryankearney.com/2012/08/it-costs-35-dollars-million-to-send-an-hd-video-over-sms-while-roaming-on-att</id>
+    <content type="html"><![CDATA[<p>AT&amp;T has the following chart on their webpage at <a href="http://www.wireless.att.com/learn/international/roaming/international-roaming.jsp">http://www.wireless.att.com/learn/international/roaming/international-roaming.jsp</a> which outlines roaming rates while outside the U.S. We’re going to concentrate on the Text Messages row, also known as SMS messages.</p>
+
+<table>
+    <tbody>
+        <tr>
+            <th colspan="2">SENDING TEXT, PICTURE, AND VIDEO MESSAGES WHEN OUTSIDE THE U.S.</th>
+        </tr>
+        <tr>
+            <td>Text Messages</td>
+            <td>$0.50 per message sent</td>
+        </tr>
+        <tr>
+            <td>Picture and Video Messages</td>
+            <td>$1.30 per message sent</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<p>I did the math and Tweeted my findings.</p>
+
+<!--more-->
+
+
+<blockquote class="twitter-tweet"><p>So I just did the math. AT&amp;T charges $3,355,443.20 per GB to send via text messages when you’re roaming outside the US. That’s 3.3 Million.</p>&mdash; Ryan Kearney (@RyanAKearney) <a href="https://twitter.com/RyanAKearney/status/237585880276144128">August 20, 2012</a></blockquote>
+
+
+<script async src="http://blog.ryankearney.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>A few hours later, an AT&amp;T employee Tweets back (at least according to their Twitter bio they appear to be), but then almost immediately deletes their Tweet. No matter, their reply was already sent via text message, email, and cached on my desktop Twitter client Tweetbot. Below is a screenshot.</p>
+
+<p><span class='caption-wrapper'><a href='/images/2012/08/ATTTweet.png'><img class='caption' src='/images/2012/08/ATTTweet.png' width='' height='' alt='Someone affiliated with AT&amp;T replies back, only to quickly delete their post.' title='Someone affiliated with AT&amp;T replies back, only to quickly delete their post.'></a><span class='caption-text'>Someone affiliated with AT&amp;T replies back, only to quickly delete their post.</span></span></p>
+
+<p><blockquote><p>@RyanAKearney actually 1 character in a msg equals abt 1 kb.1024KB=1MB..same conversion to GB-AT&amp;T charges 19.97/mb or 120mb for $30 #fact</p></blockquote></p>
+
+<p>Actually, the body of a text message is 140 bytes which is 160 7-bit characters. I incorrectly assumed they were 160 bytes when I made my initial calculation #fact. So one character in a text message is 7 bits, far off from the 1,000 bits you claim it is. Then she goes off to say AT&amp;T charges $19.97 per megabit and somehow that amounts to 120 megabits for $30? I can see why they deleted the tweet.</p>
+
+<p>Now lets do the math here one step at a time.</p>
+
+<ol>
+<li>1024 bytes = 1 KiB</li>
+<li>1024 KiB = 1 MiB</li>
+<li>1024 MiB = 1 Gib</li>
+<li>1024 * 1024 * 1024 = 1,073,741,824 bytes per GiB</li>
+</ol>
+
+
+<p>Now that we know how many bytes are in 1GiB, we can divide that number by 140, the number of bytes of data you can send in a text message.</p>
+
+<ol start="5">
+    <li>1,073,741,824 / 140 = 7,669,585 (rounded up)</li>
+</ol>
+
+
+<p>This means we have to send 7,669,585 SMS messages to send 1GB of data (and this is assuming you can represent any set of data in an SMS message which I don’t believe you can, but that’s besides the point since it would just made this already large number even larger).</p>
+
+<p>Finally, since AT&amp;T charges $0.50 per SMS message, we just multiply our number of messages by $0.50 to get…</p>
+
+<p>$3,834,792.50</p>
+
+<p>If you were sending that 1GiB of data to another AT&amp;T customer, that amount would be</p>
+
+<p>$7,669,585</p>
+
+<p>What’s this mean? If you wanted to send a typical HD video from one AT&amp;T cell phone to another via SMS messages, assuming the video is 4.6GiB in size, it would cost:</p>
+
+<p>$35,280,091</p>
+
+<p>So there you have it. $35 Million to send a 4.6GiB HD movie from one phone to another using SMS while roaming.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to: Quickly reach your 32GB bonus space for Dropbox for next to nothing]]></title>
+    <link href="http://blog.ryankearney.com/2011/05/how-to-quickly-reach-your-32gb-bonus-space-for-dropbox-for-next-to-nothing/"/>
+    <updated>2011-05-07T21:44:00-05:00</updated>
+    <id>http://blog.ryankearney.com/2011/05/how-to-quickly-reach-your-32gb-bonus-space-for-dropbox-for-next-to-nothing</id>
+    <content type="html"><![CDATA[<p><span class='caption-wrapper'><a href='/images/2011/05/DropboxQuota.png'><img class='caption' src='/images/2011/05/DropboxQuota.png' width='' height='' alt='$9.99 a month – 50 GB storage + 32 GB referral space + 250MB bonus = 82.25GB' title='$9.99 a month – 50 GB storage + 32 GB referral space + 250MB bonus = 82.25GB'></a><span class='caption-text'>$9.99 a month – 50 GB storage + 32 GB referral space + 250MB bonus = 82.25GB</span></span></p>
+
+<h2>Dropbox</h2>
+
+<p>Dropbox offers 2GB of online storage completely free. The free plans have a referral limit of 8GB resulting in a maximum of 10GB of free storage plus 250MB if you complete the getting started steps. If you convert to a paid plan (starting at $9.99 a month) then the amount of extra space you can get from referrals doubles to 16GB. In addition, instead of receiving 250MB per referred user, you gain 512MB. The increased bonus is retroactive so your bonus space will double once you make the switch.</p>
+
+<!--more-->
+
+
+<p>Recently, Dropbox started giving double referral space to students as well! You can claim your double space here: <a href="https://www.dropbox.com/edu.">https://www.dropbox.com/edu.</a> You’ll need a .edu email address to take advantage of the double referral bonus for students. Since these two bonus are compounding, you’re awarded with a whopping <strong>1GB</strong> of extra space per user you refer, up to a total of 32 extra GB.</p>
+
+<p>So, to maximize your extra storage, you’ll need a paid plan and a .edu email address. If you can’t afford to switch to a paid plan, you can still use the .edu email address to reach 16GB of extra storage, giving you 18GB of storage for free.</p>
+
+<p>Now, the hard part becomes actually getting 32 people to sign up with your referral code. You can only refer new people and you can’t use the same computer your account is on (so you can’t refer yourself over and over to cheat the system). You could try telling your friends and family, posting your referral link to Facebook and Twitter. But what if they all already have, or have no use for Dropbox?</p>
+
+<h2>Google Adwords</h2>
+
+<p><span class='caption-wrapper left'><a href='/images/2011/05/DropboxAd.png'><img class='caption' src='/images/2011/05/DropboxAd.png' width='' height='' alt='The advertisement I used' title='The advertisement I used'></a><span class='caption-text'>The advertisement I used</span></span></p>
+
+<p>I know what you’re thinking, and it’s probably something like “Hey, you said this would cost next to nothing, I’m not paying for advertisements!”. But if you continue on, there are actually ways to get $100 in free advertising revenue from Google or a partner. So, without further ado…  I created an advertisement using <a href="http://adwords.google.com/">Google Adwords</a> using the keyword “Dropbox”. I had a bunch of other keywords as well such as SugarSync and box.net (two competing services), cloud storage, online backup, and other terms that could be used to describe Dropbox. However, I noticed that those keywords were not performing as well as I had expected, so I removed them. After all, your best bet is to capture people who know they’re going to sign up for Dropbox, and intercept them with your referral link. This results in a high conversion rate since you aren’t trying to get them to sign up for anything they weren’t planning on.</p>
+
+<h2>The Campaign</h2>
+
+<p><span class='caption-wrapper'><a href='/images/2011/05/AdsenseCampaignSettings.png'><img class='caption' src='/images/2011/05/AdsenseCampaignSettings.png' width='' height='' alt='Default bidding option with $100/day budget.' title='Default bidding option with $100/day budget.'></a><span class='caption-text'>Default bidding option with $100/day budget.</span></span></p>
+
+<p>As far as the advertisement goes, it’s entirely up to you what you want to put for the title/description. You could use a graphical advertisement if you wanted to, or just a text-based ad like I did. There’s just one important thing to note, and that’s your Budget. Make sure you set this to something you’re able to pay. For example, I set it to $100 so I could eat up my Google AdWords credit in 1 day and be done with it. <strong>It’s extremely important you realize that if your credit expires, you will be charged for advertising fees if you leave your ad running.</strong> With that being said, just make sure you Pause or Delete your campaign when you’re finished. For good measure, in addition to pausing my campaign I went ahead and set the budget to $0.01/day. This was more of a paranoid thing than anything, since the pausing of the campaign took effect immediately.</p>
+
+<p><span class='caption-wrapper'><a href='/images/2011/05/AdSenseDevices.png'><img class='caption' src='/images/2011/05/AdSenseDevices.png' width='' height='' alt='Choose the devices you wish your ad to appear on.' title='Choose the devices you wish your ad to appear on.'></a><span class='caption-text'>Choose the devices you wish your ad to appear on.</span></span></p>
+
+<p>In addition to setting a budget, you may want to consider which devices your ads appears on. I removed mobile devices since the chances of someone signing up for Dropbox from a mobile phone are quite slim considering you need to install the desktop application to really get started. This ensures you wont waste any money showing ads to people who more than likely won’t get you the referral credit you want.</p>
+
+<p><span class='caption-wrapper'><a href='/images/2011/05/AdSenseNetworks.png'><img class='caption' src='/images/2011/05/AdSenseNetworks.png' width='' height='' alt='Choose the networks you want your ad to appear on.' title='Choose the networks you want your ad to appear on.'></a><span class='caption-text'>Choose the networks you want your ad to appear on.</span></span></p>
+
+<p>Finally, if you want to change the Networks your ads appear on, you may do so as well. I choose to only display the ad on Google searches since the chances of getting someone to sign up for Dropbox is higher if they are explicitly searching for Dropbox than if they read an article or saw a video that triggered the advertisement.</p>
+
+<h2>Getting it all for free</h2>
+
+<p>So now, the part that ties it all together. Chances are you don’t want to pay $100 for some easy referrals you may or may not even need. However, fear not because there are many ways you can receive up to $100 in free advertising credit. For example, <a href="http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=ryankearney">Hostgator</a> will give you $100 in Google AdWords credit when you sign up for any one of their shared hosting packages. Many other hosting companies offer the same or similar amounts of AdWords credit. However, if you’re not willing to sign up for a service you don’t need, you can always try creating an AdWords account and letting it sit dormant for a week. Not too long after I created my AdWords account I got an automated email from Google offering me $100 credit to start using AdWords. Users beware, this is the included fine print in the email.</p>
+
+<p><blockquote><p>One promotional credit per customer. Promotional credit valid only for new Google AdWords customers with self-managed signup accounts. <strong>Advertisers will be charged for advertising that exceeds the promotional credit. Advertisers can suspend their ads at any time if they do not wish to receive additional charges beyond the free credit amount.</strong> Offer subject to ad approval, valid registration and acceptance of the Google AdWords Program standard terms and conditions. The promotional credit is non-transferable and may not be sold or bartered. Offer may be revoked at any time for any reason by Google Inc. Advertisers with self-managed signup accounts are subject to a $5 (CAD$10) activation fee. Advertisers who choose prepay billing are subject to a $10 (CAD$20) minimum prepayment fee before their account is activated. Any such prepay amount will be credited to Advertiser’s account once account is activated. Offer valid only for sign ups through the URL provided for the promotion by customers with billing address in the US or Canada. Offer void where prohibited by law. Coupon offer expires in 30 days!</p></blockquote></p>
+
+<p>Basically it’s just a fair warning that if you go over your free credit, you are responsible for any additional charges. As long as you don’t forget your ad is running and you don’t set your budget too high, you’ll be fine. When I signed up, my $100 Google AdWords Gift Card was actually counted as $105 and the $5 non-refundable signup fee was deducted from my balance, leaving me with the $100 to use as I please.</p>
+
+<p>The most satisfying thing about this whole process was getting to see Dropbox alert me from the system tray that my quota had been increased. Knowing you’re getting up to 32GB of extra space, for free, with very little effort on your part.</p>
+
+<h2>Extra Stats</h2>
+
+<p>In the end, I went $1.69 over my credit, my ad got 135 clicks and 24 people signed up for Dropbox. Of those 24 people, 4 have yet to download and install Dropbox and 1 was ineligible due to trying to sign up with an email address that was already registered with Dropbox. Those may or may not be the best results, but I put next to zero effort into the advertisement and the plethora of settings Google gives you to customize how, when, where, and for how much you pay in order for your ad to appear. Using the default settings resulted in an average cost per click of $0.75 but you could have just as easily set a CPC maximum of $0.25 and potentially have received 3 times more referrals than I did. However, if you have a low CPC bid then your advertisement may not appear on top, or in a prime location. If you’re patient and you can wait and let your referrals trickle in than that would be the way to go. However, due to my impatience and just wanting to get it over with, I let Google handle my CPC bids which resulted in a higher cost ad, but a much faster turnaround.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iPad vs HP Mini Netbook]]></title>
+    <link href="http://blog.ryankearney.com/2010/01/ipad-vs-hp-mini-netbook/"/>
+    <updated>2010-01-29T21:08:00-06:00</updated>
+    <id>http://blog.ryankearney.com/2010/01/ipad-vs-hp-mini-netbook</id>
+    <content type="html"><![CDATA[<p>The iPad vs HP Mini Netbook is a much heated debate amongst mobile devices.</p>
+
+<p><blockquote><p>When you compare, there’s no comparison</p><footer><strong>AT&amp;T</strong></footer></blockquote></p>
+
+<p>Ultimatrix pointed out where Steve Jobs compared the iPad to a Netbook, so you can stop posting comments about comparing two completely different devices.</p>
+
+<!--more-->
+
+
+<p>Skip to 1:30</p>
+
+<p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/OBhYxj2SvRI "></iframe></div></p>
+
+<p><blockquote><p>The problem is, Netbooks aren’t better at anything</p><footer><strong>Steve Jobs</strong></footer></blockquote></p>
+
+<p>Well Steve, let’s see what the Netbook is better at.</p>
+
+<p>Many of the Dell <a href="http://www.dell.com/us/p/popular-laptop-deals">Laptop deals</a> now include the Mini 10v and 11 at several hundred dollars less than the cheapest iPad.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center"><a href="http://www.amazon.com/gp/product/B00365F6LE?ie=UTF8&amp;tag=ryankear-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B00365F6LE"><img src="/images/2010/01/ipad.jpg" alt="iPad" /></a></th>
+<th align="center"></th>
+<th align="center"><a href="http://www.amazon.com/gp/product/B002ONCBVC?ie=UTF8&amp;tag=ryankear-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B002ONCBVC"><img src="/images/2010/01/hp.jpg" alt="HP Mini Netbook" /></a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">$829</td>
+<td align="center">Price</td>
+<td align="center">$699</td>
+</tr>
+<tr>
+<td align="center">1Ghz</td>
+<td align="center">Processor</td>
+<td align="center">1.66Ghz</td>
+</tr>
+<tr>
+<td align="center">64GB</td>
+<td align="center">Disk Space</td>
+<td align="center">320GB</td>
+</tr>
+<tr>
+<td align="center">9.7″</td>
+<td align="center">Screen Size</td>
+<td align="center">11.6″</td>
+</tr>
+<tr>
+<td align="center">1024×768</td>
+<td align="center">Screen Resolution</td>
+<td align="center">1366×768</td>
+</tr>
+<tr>
+<td align="center">140,000</td>
+<td align="center">Applications Available</td>
+<td align="center">Millions</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">USB Ports</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">2GB</td>
+<td align="center">Mobile Data</td>
+<td align="center">Unlimited</td>
+</tr>
+<tr>
+<td align="center">YES</td>
+<td align="center">AT&amp;T</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Verizon</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Sprint</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Tether to existing phone</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Download Apps From The Web</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Handle Compressed Archives</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">External</td>
+<td align="center">Physical Keyboard</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">YES</td>
+<td align="center">Bluetooth</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Webcam</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Firefox/Chrome</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">YES</td>
+<td align="center">Safari</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Adobe Flash</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Optical Drive</td>
+<td align="center">External</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Video Chat</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Adobe Photoshop</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Microsoft Outlook</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Multitasking</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Windows 7</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Run Any Linux Distro</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Run OSX</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Removable Battery</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Hardware Upgradeable</td>
+<td align="center">YES</td>
+</tr>
+<tr>
+<td align="center">$10/Month</td>
+<td align="center">Hulu</td>
+<td align="center">Free</td>
+</tr>
+<tr>
+<td align="center">NO</td>
+<td align="center">Netflix</td>
+<td align="center">YES</td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Comparing CDN Performance (Part 2)]]></title>
+    <link href="http://blog.ryankearney.com/2009/12/comparing-cdn-performance-part-2/"/>
+    <updated>2009-12-15T12:18:00-06:00</updated>
+    <id>http://blog.ryankearney.com/2009/12/comparing-cdn-performance-part-2</id>
+    <content type="html"><![CDATA[<p>Last week I wrote an article comparing Amazon S3 and Cloud Front to Rackspace Cloud Files. Since then I have gotten additional requests to compare more content delivery networks. The following is a comparison of Amazon Cloud Front, Rackspace Cloud Files, SimpleCDN, and GoGrid CDN. I tried to cover as many bases as I could. Please let me know if I missed anything.</p>
+
+<h2>Response Time</h2>
+
+<p>We will start by taking a look at the response time for the three services over a period of 1 week</p>
+
+<p><span class='caption-wrapper'><a href='/images/2009/12/CloudFrontResponseTime.png'><img class='caption' src='/images/2009/12/CloudFrontResponseTime.png' width='200' height='215' alt='Amazon CloudFront' title='Amazon CloudFront'></a><span class='caption-text'>Amazon CloudFront</span></span>
+<span class='caption-wrapper'><a href='/images/2009/12/GoGridResponseTime.png'><img class='caption' src='/images/2009/12/GoGridResponseTime.png' width='200' height='215' alt='GoGrid CDN' title='GoGrid CDN'></a><span class='caption-text'>GoGrid CDN</span></span>
+<span class='caption-wrapper'><a href='/images/2009/12/RackSpaceResponseTime.png'><img class='caption' src='/images/2009/12/RackSpaceResponseTime.png' width='200' height='214' alt='Rackspace CloudFiles' title='Rackspace CloudFiles'></a><span class='caption-text'>Rackspace CloudFiles</span></span>
+<span class='caption-wrapper'><a href='/images/2009/12/SimpleCDNResponseTime.png'><img class='caption' src='/images/2009/12/SimpleCDNResponseTime.png' width='200' height='213' alt='SimpleCDN' title='SimpleCDN'></a><span class='caption-text'>SimpleCDN</span></span></p>
+
+<!--more-->
+
+
+<p>Rackspace Cloud Files came in first place with an average response time of just <strong>69ms</strong>, however, GoGrid CDN was very close behind with <strong>70ms</strong>. In third place was Amazon Cloud Front with an average response time of <strong>225ms</strong> and in last place was SimpleCDN with an average response time of <strong>402ms</strong>. Here’s a chart with the four Content Delivery Network’s average, fastest, and slowest response times over a period of one week.</p>
+
+<h3>Response times in milliseconds</h3>
+
+<table>
+<thead>
+<tr>
+<th>Service               </th>
+<th>Average  </th>
+<th> Fastest </th>
+<th> Slowest</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rackspace Cloud Files </td>
+<td> 69      </td>
+<td> 24      </td>
+<td> 651</td>
+</tr>
+<tr>
+<td>Amazon Cloud Front    </td>
+<td> 225     </td>
+<td> 53      </td>
+<td> 522</td>
+</tr>
+<tr>
+<td>SimpleCDN             </td>
+<td> 402     </td>
+<td> 188     </td>
+<td> 2,235</td>
+</tr>
+<tr>
+<td>GoGrid CDN            </td>
+<td> 70      </td>
+<td> 26      </td>
+<td> 814</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Not only did Rackspace Cloud Files the lowest average response time, it also had the fastest response time overall in the one week time frame. GoGrid CDN also proved to be a good contestant with an average response time of a mere one millisecond over that of Rackspace Cloud Files. While Amazon Cloud Front had quite a bit higher average response time, it did have the lowest, slowest response time with <strong>522ms</strong> as the longest response time. SimpleCDN has slowest response time of over two seconds, which is just awful for a content delivery network.</p>
+
+<h2>Pricing</h2>
+
+<p>Here’s a quick breakdown of pricing for Amazon and Rackspace CDN services.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>                        Amazon                         </th>
+<th> Rackspace  </th>
+<th> GoGrid       </th>
+<th> SimpleCDN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Storage Costs          </td>
+<td> $0.15 / GB†                    </td>
+<td> $0.15 / GB </td>
+<td> $0.60 / GB†† </td>
+<td> $0.75 / GB††</td>
+</tr>
+<tr>
+<td>Bandwidth Out          </td>
+<td> $0.17 / GB† (US Traffic‡)      </td>
+<td> $0.22 / GB </td>
+<td> $0.25 / GB   </td>
+<td> $0.039 / GB†</td>
+</tr>
+<tr>
+<td>Bandwidth In           </td>
+<td> Free until June 30th 2010*     </td>
+<td> $0.08 / GB </td>
+<td> Free         </td>
+<td> Free</td>
+</tr>
+<tr>
+<td>PUT/POST/LIST Requests </td>
+<td> $0.01 per 1,000                </td>
+<td> $0.01 per 500<br>Free for files over 250k </td>
+<td> Free </td>
+<td> Free</td>
+</tr>
+<tr>
+<td>GET Requests           </td>
+<td> $0.01 per 10,000 (US Traffic‡) </td>
+<td> Free       </td>
+<td> Free         </td>
+<td> Free</td>
+</tr>
+<tr>
+<td>DELETE Requests        </td>
+<td> Free                           </td>
+<td> Free       </td>
+<td> Free         </td>
+<td> Free</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>*After June 30th inbound data transfer is $0.10 / GB
+†Variable Cost; Decreases as more space or bandwidth is used.
+††Storage not necessary, more information in the features section.
+‡Higher charges apply for other regions such as Japan. See the <a href="http://aws.amazon.com/cloudfront/#pricing">Full Pricing Model</a> for more informmation.</p>
+
+<p>I wouldn’t consider SimpleCDN to be a true pay-as-you-go service, they require you to add funds to your account, with the smallest amount being $50. You can view the cost calculator for the services here. <a href="http://www.rackspacecloud.com/cloud_hosting_products/files/pricing">Rackspace Cloud Files</a>, <a href="http://calculator.s3.amazonaws.com/calc5.html">Amazon Web Services</a>, <a href="http://simplecdn.com/calculator">SimpleCDN</a>, (GoGrid CDN currently has no cost estimation calculator). Keep in mind when you setup the Amazon Web Services monthly calculator you will need to add S3 and Cloud Front. The S3 account will hold all of your data, and the outbound bandwidth will vary depending on how many files you have, their sizes, and how often the Cloud Front endpoints refresh their cache of your data. Cloud Front will then be where you allocate your total projected outbound bandwidth and average object size (which is to calculate GET requests I’m guessing) as well as allocate percentages to different regions, since Amazon charges differently per GB depending on the region the server responding to the request is located.</p>
+
+<h2>Speed</h2>
+
+<p>Next up is a speed test. I’ve uploaded a 100MB file to Amazon S, Rackspace Cloud Files, SimpleCDN, and GoGrid CDN to download from various locations. Listed below is the time taken (in seconds) to download the 100MB file. Each test was done three times with the fastest of the three tests listed below.</p>
+
+<table>
+<thead>
+<tr>
+<th>Network Tested From</th>
+<th>Amazon</th>
+<th>Rackspace</th>
+<th>GoGrid CDN</th>
+<th>Simple CDN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Residential ISP (Central Florida)</td>
+<td>53s (1.89MB/s)</td>
+<td>63s (1.58MB/s)</td>
+<td>75s (1.34MB/s)</td>
+<td>59s (1.71MB/s)</td>
+</tr>
+<tr>
+<td>Rackspace (Texas)</td>
+<td>2.1s (46.7MB/s)</td>
+<td>1.7s (58.8MB/s)</td>
+<td>1.3s (74.6MB/s)</td>
+<td>3.3s (30.4MB/s)</td>
+</tr>
+<tr>
+<td>Amazon (N. Virginia)</td>
+<td>2.5s (40.0MB/s)</td>
+<td>13s (7.42MB/s)</td>
+<td>10s (9.8MB/s)</td>
+<td>3.3s (30.5MS/s)</td>
+</tr>
+<tr>
+<td>Amazon (N. California)</td>
+<td>2.4s (41.7MB/s)</td>
+<td>2.9s (35.1MB/s)</td>
+<td>3.6s (27.6MB/s)</td>
+<td>1.6s (54.0MB/s)</td>
+</tr>
+<tr>
+<td>Amazon (Ireland)</td>
+<td>2.1s (46.7MB/s)</td>
+<td>7.4s (13.6MB/s)</td>
+<td>2.0s (51.3MB/s)</td>
+<td>7.2s (13.8MB/s)</td>
+</tr>
+<tr>
+<td>GoGrid (California)</td>
+<td>2.0s (49.8MB/s)</td>
+<td>2.7s (37.1MB/s)</td>
+<td>2.1s (47.1MB/s)</td>
+<td>2.6s (38.1MB/s)</td>
+</tr>
+<tr>
+<td>The Planet (Texas)</td>
+<td>9.0s (11.1MB/s)</td>
+<td>9.2s (10.9MB/s)</td>
+<td>8.9s (11.2MB/s)</td>
+<td>32s (3.09MB/s)</td>
+</tr>
+<tr>
+<td>Average (Residential ISP Excluded)</td>
+<td>3.35s (39.3MB/s)</td>
+<td>6.15s (34.3MB/s)</td>
+<td>4.65s (36.9MB/s)</td>
+<td>8.3s (28.3MB/s)</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Not counting the slow residential ISP download rate we can see that Amazon Cloud Front came out ahead on the speed tests with an average download speed of <strong>39.3MB/s</strong>. Coming in second was GoGrid CDN with <strong>36.9MB/s</strong> followed by Rackspace Cloud Files at <strong>34.3MB/s</strong> and finally SimpleCDN with just <strong>28.3MB/s</strong>. SimpleCDN had some good tests, however, with a fastest speed of <strong>54MB/s</strong> clocked from Amazon’s networks in Northern California. The <strong>3.09MB/s</strong> speed was what really brought it down, which came from ThePlanet’s network in Texas. All these tests were done between 7PM and 9PM EST and are subject to change throughout the day due to network congestion.</p>
+
+<h2>Features</h2>
+
+<p>What’s a CDN without features? Well, it’s just a CDN. But hey, that’s what a CDN does, deliver content. Anything above and beyond that is an added bonus. Lets go over the various features Amazon and Rackspace have to offer.</p>
+
+<table>
+<thead>
+<tr>
+<th>Feature                </th>
+<th> Amazon     </th>
+<th> Rackspace </th>
+<th> GoGrid CDN </th>
+<th> Simple CDN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maximum File Size      </td>
+<td> 5GB        </td>
+<td> 5GB       </td>
+<td> Unknown    </td>
+<td> Unknown</td>
+</tr>
+<tr>
+<td>File Storage Required  </td>
+<td> Yes        </td>
+<td> Yes       </td>
+<td> No         </td>
+<td> No</td>
+</tr>
+<tr>
+<td>FTP Access             </td>
+<td> No         </td>
+<td> No        </td>
+<td> Yes        </td>
+<td> Yes</td>
+</tr>
+<tr>
+<td>Free Endpoint Transfer </td>
+<td> No         </td>
+<td> Yes       </td>
+<td> Yes        </td>
+<td> Yes</td>
+</tr>
+<tr>
+<td>HTTPS                  </td>
+<td> No         </td>
+<td> No        </td>
+<td> Yes ($299 Setup $299/Month) </td>
+<td> Yes (Free)</td>
+</tr>
+<tr>
+<td>Raw Logs               </td>
+<td> Yes        </td>
+<td> Yes       </td>
+<td> Yes        </td>
+<td> No</td>
+</tr>
+<tr>
+<td>Real Time Logging      </td>
+<td> No         </td>
+<td> No        </td>
+<td> Yes ($199.98 Setup $199.98/Month) </td>
+<td> No</td>
+</tr>
+<tr>
+<td>Custom CNAME           </td>
+<td> Yes (Free) </td>
+<td> No        </td>
+<td> Yes (Free) </td>
+<td> Yes ($5 each)</td>
+</tr>
+<tr>
+<td>Custom Response Headers</td>
+<td> Yes        </td>
+<td> No        </td>
+<td> No         </td>
+<td> No</td>
+</tr>
+<tr>
+<td>Flash Streaming (rtmp) </td>
+<td> Yes        </td>
+<td> No        </td>
+<td> Yes        </td>
+<td> Yes</td>
+</tr>
+<tr>
+<td>Windows Media (mms)    </td>
+<td> No         </td>
+<td> No        </td>
+<td> Yes        </td>
+<td> Yes</td>
+</tr>
+<tr>
+<td>Torrent Support        </td>
+<td> S3 Only    </td>
+<td> No        </td>
+<td> No         </td>
+<td> No</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>GoGrid also offers live streaming, allowing you to push your live content to a rtmp server and having others tune in. GoGrid charges you their standard rate for how much bandwidth you use, however, SimpleCDN charges you a flat monthly fee for Live services starting at $59 a month for 250 concurrent views and going up from there. On the plus side, there is no bandwidth charges for their Live services, and no limit to the video bitrate. You would have to do the math to determine if GoGrid or SimpleCDN would be more cost-effective for you. Chances are if you plan to do a lot of streaming, or stream high-definition content, SimpleCDN might be the better  bet for you.</p>
+
+<p>GoGrid and SimpleCDN offer something else that Rackspace and Amazon don’t, the ability to map a CDN URL to your server. What I mean is, instead of uploading files to GoGrid and SimpleCDN and having to pay monthly storage costs, you could just host the files on your server and use what they call Customer Origin/Mirror Buckets. After you map one of these to a URL where you keep all of your files, requests to the file through the CDN url will cause that end point to fetch the data from your own server and cache it for future requests. You’ll be able to get the same CDN delivery speed with none of the CDN storage costs.</p>
+
+<p>Using Amazon Cloud Front requires an Amazon S3 account. Having an S3 account means you can use its torrent feature. If you add “?torrent” to the end of any S3 URL, the server will return a .torrent file instead of the file requested. This is especially great for large files since you will have other users helping you out with distribution, lowering your bandwidth cost. The torrent uses Amazons’ tracker and their S3 machines are seeding the file. This way your torrent will never die, so long as the file remains on the S3 servers. Once again, while this isn’t a feature of their CDN service, it’s still a feature of S3, which is required to use their CDN service. If it’s streaming video you want, then GoGrid CDN or SimpleCDN is the choice for you. Both offer Windows Media and Flash Streaming services for your content. Using these will allow users to fast forward through your video without having to wait for it to load to that point. GoGrid also offers a way to throttle bandwidth usage. This is especially useful and can save you a ton on bandwidth costs. Limiting the users bandwidth will allow the video to buffer and offer a constant viewing experience, however, it will prevent the entire video from buffering too quickly. This way, if the user decides they do not wish the watch the entire video, you won’t have to pay for the bandwidth of the entire video, only that which has been buffered.</p>
+
+<h2>Conclusion</h2>
+
+<p>GoGrid CDN is still in beta and is relatively new. However, it’s proven so far to have very low response times like Rackspace Cloud Files. While GoGrid wasn’t as fast as Amazon Cloud Front, it was still in second place and achieved very high speeds. SimpleCDN used to be a great CDN service, giving users streaming capabilities with their media. However, now with GoGrid CDN stepping up to the plate with the same streaming services as SimpleCDN, it looks like it’s taken the lead. The great thing about pay-as-you-go CDN networks is that you can use them all, and not have to pay  large monthly fees. For example, I’m using GoGrid CDN to deliver streaming video content, while using Amazon Cloud Front to deliver my static content. It all comes down to what you need. And if you need to stream live high-definition content to thousands of people at the same time, well then SimpleCDN just might be the best thing for you. Each CDN has their own features, and it’s up to you to decide exactly what you need. With pay-as-you-go services, you really have nothing to lose but your time.</p>
+]]></content>
+  </entry>
+  
+</feed>
