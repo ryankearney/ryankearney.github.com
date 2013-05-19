@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Technology | Ryan Kearney]]></title>
   <link href="http://blog.ryankearney.com/blog/categories/technology/atom.xml" rel="self"/>
   <link href="http://blog.ryankearney.com/"/>
-  <updated>2013-05-19T03:55:03-05:00</updated>
+  <updated>2013-05-19T03:57:37-05:00</updated>
   <id>http://blog.ryankearney.com/</id>
   <author>
     <name><![CDATA[Ryan Kearney]]></name>
@@ -62,7 +62,7 @@
     <link href="http://blog.ryankearney.com/2012/08/it-costs-35-million-to-send-an-hd-video-over-sms-while-roaming-on-att/"/>
     <updated>2012-08-15T22:13:00-05:00</updated>
     <id>http://blog.ryankearney.com/2012/08/it-costs-35-million-to-send-an-hd-video-over-sms-while-roaming-on-att</id>
-    <content type="html"><![CDATA[<p>AT&amp;T has the following chart on their webpage at <a href="http://www.wireless.att.com/learn/international/roaming/international-roaming.jsp">http://www.wireless.att.com/learn/international/roaming/international-roaming.jsp</a> which outlines roaming rates while outside the U.S. We’re going to concentrate on the Text Messages row, also known as SMS messages.</p>
+    <content type="html"><![CDATA[<p>AT&amp;T has <a href="http://www.wireless.att.com/learn/international/roaming/international-roaming.jsp">a chart on their webpage</a> which outlines roaming rates while outside the U.S. We’re going to concentrate on the Text Messages row, also known as SMS messages.</p>
 
 <table>
     <tbody>
