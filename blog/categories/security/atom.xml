@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Security | Ryan Kearney]]></title>
-  <link href="http://blog.ryankearney.com/blog/categories/security/atom.xml" rel="self"/>
-  <link href="http://blog.ryankearney.com/"/>
-  <updated>2013-05-19T03:15:23-05:00</updated>
-  <id>http://blog.ryankearney.com/</id>
+  <link href="http://ryankearney.github.io/blog/categories/security/atom.xml" rel="self"/>
+  <link href="http://ryankearney.github.io/"/>
+  <updated>2013-05-19T03:37:34-05:00</updated>
+  <id>http://ryankearney.github.io/</id>
   <author>
     <name><![CDATA[Ryan Kearney]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Comcast caught hijacking web traffic]]></title>
-    <link href="http://blog.ryankearney.com/2013/01/comcast-caught-hijacking-web-traffic/"/>
+    <link href="http://ryankearney.github.io/2013/01/comcast-caught-hijacking-web-traffic/"/>
     <updated>2013-01-09T12:56:00-06:00</updated>
-    <id>http://blog.ryankearney.com/2013/01/comcast-caught-hijacking-web-traffic</id>
+    <id>http://ryankearney.github.io/2013/01/comcast-caught-hijacking-web-traffic</id>
     <content type="html"><![CDATA[<p>On November 20th, 2012 Comcast hijacked my HTTP traffic and re-routed it through their own servers, injecting a “notice” on the page before completing the request. What this means is instead of my web request being routed to the website I wanted to visit, Comcast took it upon themselves to hijack my web traffic, forcing it to go through their servers instead. This poses a massive security risk for users since there’s no telling what type of logging Comcast uses on their end. Why did they do all this? To force a “courtesy notice” on every webpage I visit until I logged into my Comcast account because I was within 90% of my new 300GB limit?</p>
 
 <p>In my testing I discovered that this only affects HTTP traffic and not HTTPS traffic. What this means is while your online banking may be safe, any other website you visit over HTTP may cause your privacy to be at risk. This is a prime example of why SSL encryption on websites is so important. However, it may only be a matter of time before Comcast starts executing man in the middle attacks on SSL traffic.</p>
@@ -213,9 +213,9 @@ checkBulletin();
   
   <entry>
     <title type="html"><![CDATA[Never Give Your Information To 10 Minute Old Startups]]></title>
-    <link href="http://blog.ryankearney.com/2012/10/never-give-your-information-to-10-minute-old-startups/"/>
+    <link href="http://ryankearney.github.io/2012/10/never-give-your-information-to-10-minute-old-startups/"/>
     <updated>2012-10-05T22:26:00-05:00</updated>
-    <id>http://blog.ryankearney.com/2012/10/never-give-your-information-to-10-minute-old-startups</id>
+    <id>http://ryankearney.github.io/2012/10/never-give-your-information-to-10-minute-old-startups</id>
     <content type="html"><![CDATA[<p>Handing over sensitive information to startups that are only a few minutes old can lead to bad, bad things.</p>
 
 <h2>The Startup</h2>
